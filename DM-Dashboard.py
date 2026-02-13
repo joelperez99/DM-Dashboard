@@ -1,23 +1,20 @@
 import streamlit as st
 
 # ===============================
-# CONFIGURACIÓN DE PÁGINA
+# CONFIG
 # ===============================
-
 st.set_page_config(
     page_title="DM Sales3",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
 
 # ===============================
-# OCULTAR HEADER Y ESPACIOS
+# CSS (LOGIN ESTILO TARJETA)
 # ===============================
-
 st.markdown("""
 <style>
-
-/* Ocultar barra superior */
+/* Ocultar UI Streamlit */
 header {visibility: hidden;}
 [data-testid="stToolbar"] {display: none;}
 [data-testid="stDecoration"] {display: none;}
@@ -25,25 +22,100 @@ header {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Quitar espacio superior */
-.block-container {
-    padding-top: 0rem;
-    padding-bottom: 0rem;
+/* Quitar padding general */
+.block-container { padding: 0 !important; }
+
+/* Wrapper centrado */
+.login-wrapper{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Quitar padding lateral */
-.main .block-container {
-    padding-left: 0rem;
-    padding-right: 0rem;
+/* Tarjeta */
+.login-card{
+  width: 520px;
+  max-width: 92vw;
+  padding: 42px 44px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(0,0,0,.08);
+  border: 1px solid rgba(0,0,0,.06);
 }
 
+/* Título grande */
+.login-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  color: #1f2937;
+}
+
+/* Subtítulo */
+.login-subtitle{
+  text-align: center;
+  margin-top: 14px;
+  margin-bottom: 26px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2b2f36;
+}
+
+/* Label */
+.login-label{
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+/* Forzar ancho del input */
+.login-card div[data-baseweb="input"]{
+  width: 100%;
+}
+
+/* Botón ancho completo */
+.login-card .stButton > button{
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 14px;
+}
+
+/* Ajuste input (altura y bordes) */
+.login-card input{
+  height: 46px !important;
+  border-radius: 10px !important;
+}
+
+/* Mensajes de error más centrados */
+.login-card .stAlert{
+  margin-top: 12px;
+}
+
+/* Iframe fullscreen */
+.pbi-frame{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # ===============================
-# PASSWORD DESDE SECRETS
+# AUTH
 # ===============================
-
 PASSWORD = st.secrets["APP_PASSWORD"]
 
 if "authenticated" not in st.session_state:
@@ -52,45 +124,38 @@ if "authenticated" not in st.session_state:
 # ===============================
 # LOGIN
 # ===============================
-
 if not st.session_state.authenticated:
 
+    st.markdown('<div class="login-wrapper"><div class="login-card">', unsafe_allow_html=True)
+
     st.markdown("""
-    <div style='text-align:center; margin-top:150px;'>
-        <h1>🔐 Acceso Privado</h1>
-        <h3>DM Sales3</h3>
-    </div>
+      <div class="login-title">🔐 <span>Acceso Privado</span></div>
+      <div class="login-subtitle">DM Sales3</div>
     """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([2,1,2])
+    st.markdown('<div class="login-label">Contraseña</div>', unsafe_allow_html=True)
+    password = st.text_input("", type="password", label_visibility="collapsed")
 
-    with col2:
-        password = st.text_input("Contraseña", type="password")
+    if st.button("Entrar"):
+        if password == PASSWORD:
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("Contraseña incorrecta")
 
-        if st.button("Entrar", use_container_width=True):
-            if password == PASSWORD:
-                st.session_state.authenticated = True
-                st.rerun()
-            else:
-                st.error("Contraseña incorrecta")
-
+    st.markdown('</div></div>', unsafe_allow_html=True)
     st.stop()
 
 # ===============================
-# DASHBOARD POWER BI
+# DASHBOARD
 # ===============================
-
 POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiN2U5MTBhODMtYzgxOS00OTY4LThjMGEtYTRkMmFkMDgzMGFkIiwidCI6ImMyZjliMjM5LTE0YTEtNDgyZi1hMTAyLTQyYjE0NTgzMzFjOSJ9"
 
 st.markdown(
     f"""
-    <iframe 
-        title="DM Sales3"
-        width="100%"
-        height="900"
+    <iframe class="pbi-frame"
         src="{POWERBI_URL}"
-        frameborder="0"
-        allowFullScreen="true">
+        allowfullscreen="true">
     </iframe>
     """,
     unsafe_allow_html=True
