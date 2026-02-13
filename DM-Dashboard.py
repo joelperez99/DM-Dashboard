@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ===============================
-# CONFIGURACIÓN
+# CONFIG
 # ===============================
 st.set_page_config(
     page_title="DM Sales3",
@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # ===============================
-# CSS GLOBAL
+# CSS
 # ===============================
 st.markdown("""
 <style>
@@ -28,17 +28,28 @@ footer {visibility: hidden;}
     padding: 0 !important;
 }
 
-/* LOGIN CENTRADO REAL */
+/* Contenedor centrado */
 .login-wrapper {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 350px;
+    width: 320px;
     text-align: center;
 }
 
-/* Iframe fullscreen */
+/* Reducir tamaño del input */
+div[data-baseweb="input"] {
+    max-width: 320px;
+    margin: auto;
+}
+
+/* Reducir tamaño del botón */
+.stButton > button {
+    width: 320px !important;
+    margin-top: 10px;
+}
+
 .pbi-frame {
     position: fixed;
     top: 0;
@@ -67,11 +78,11 @@ if not st.session_state.authenticated:
     st.markdown('<div class="login-wrapper">', unsafe_allow_html=True)
 
     st.markdown("<h1>🔐 Acceso Privado</h1>", unsafe_allow_html=True)
-    st.markdown("<h3>DM Sales3</h3><br>", unsafe_allow_html=True)
+    st.markdown("<h4>DM Sales3</h4><br>", unsafe_allow_html=True)
 
     password = st.text_input("Contraseña", type="password")
 
-    if st.button("Entrar", use_container_width=True):
+    if st.button("Entrar"):
         if password == PASSWORD:
             st.session_state.authenticated = True
             st.rerun()
@@ -83,7 +94,7 @@ if not st.session_state.authenticated:
     st.stop()
 
 # ===============================
-# DASHBOARD FULLSCREEN
+# DASHBOARD
 # ===============================
 POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiN2U5MTBhODMtYzgxOS00OTY4LThjMGEtYTRkMmFkMDgzMGFkIiwidCI6ImMyZjliMjM5LTE0YTEtNDgyZi1hMTAyLTQyYjE0NTgzMzFjOSJ9"
 
@@ -96,4 +107,3 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
