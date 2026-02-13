@@ -1,18 +1,27 @@
 import streamlit as st
 
-st.set_page_config(page_title="DM Sales Dashboard", layout="wide")
+st.set_page_config(
+    page_title="DM Sales3",
+    layout="wide"
+)
 
-# --- PASSWORD DESDE SECRETS ---
+# ===============================
+# PASSWORD DESDE STREAMLIT SECRETS
+# ===============================
+
 PASSWORD = st.secrets["APP_PASSWORD"]
 
-# --- SESSION STATE ---
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
-# --- LOGIN ---
+# ===============================
+# LOGIN
+# ===============================
+
 if not st.session_state.authenticated:
 
-    st.title("🔐 Acceso Privado")
+    st.markdown("## 🔐 Acceso Privado - DM Sales3")
+
     password = st.text_input("Ingresa la contraseña", type="password")
 
     if st.button("Entrar"):
@@ -20,19 +29,25 @@ if not st.session_state.authenticated:
             st.session_state.authenticated = True
             st.rerun()
         else:
-            st.error("Contraseña incorrecta")
+            st.error("❌ Contraseña incorrecta")
 
     st.stop()
 
-# --- DASHBOARD ---
-st.title("📊 DM Sales3")
+# ===============================
+# DASHBOARD
+# ===============================
+
+st.markdown("## 📊 DM Sales3")
+
+POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiN2U5MTBhODMtYzgxOS00OTY4LThjMGEtYTRkMmFkMDgzMGFkIiwidCI6ImMyZjliMjM5LTE0YTEtNDgyZi1hMTAyLTQyYjE0NTgzMzFjOSJ9"
 
 st.markdown(
-    """
-    <iframe title="DM Sales3"
+    f"""
+    <iframe 
+        title="DM Sales3"
         width="100%"
-        height="600"
-        src="https://app.powerbi.com/reportEmbed?reportId=fada8221-7a53-4e42-8f30-1fe1309abfc1&autoAuth=true&ctid=c2f9b239-14a1-482f-a102-42b1458331c9"
+        height="750"
+        src="{POWERBI_URL}"
         frameborder="0"
         allowFullScreen="true">
     </iframe>
