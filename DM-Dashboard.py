@@ -100,13 +100,18 @@ if not st.session_state.authenticated:
         st.markdown('<div class="compact-wrap">', unsafe_allow_html=True)
 
         # LOGO
-        st.markdown(
-            '<img src="https://i.postimg.cc/tJvFx7V6/463003060-8370865312967718-7946847523939617482-n.jpg" class="login-logo">',
-            unsafe_allow_html=True
-        )
+     st.markdown(
+    """
+    <div style='text-align:center; margin-bottom:25px;'>
+        <img src="https://i.postimg.cc/tJvFx7V6/463003060-8370865312967718-7946847523939617482-n.jpg"
+             style="width:240px; max-width:90%; height:auto;">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
         st.markdown("<h2 style='margin-bottom:6px;'>🔐 Acceso Privado</h2>", unsafe_allow_html=True)
-        st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales3</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales</h4>", unsafe_allow_html=True)
 
         pwd = st.text_input("Contraseña", type="password")
 
