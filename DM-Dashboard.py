@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ===============================
-# CONFIGURACIÓN
+# CONFIG
 # ===============================
 st.set_page_config(
     page_title="DM Sales3",
@@ -10,12 +10,12 @@ st.set_page_config(
 )
 
 # ===============================
-# CSS GLOBAL
+# CSS
 # ===============================
 st.markdown("""
 <style>
 
-/* Ocultar UI de Streamlit */
+/* Ocultar UI Streamlit */
 header {visibility: hidden;}
 [data-testid="stToolbar"] {display: none;}
 [data-testid="stDecoration"] {display: none;}
@@ -23,70 +23,63 @@ header {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Quitar padding */
-.block-container {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+/* Quitar padding grande */
+.block-container{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* Centrado vertical */
+/* Espacio vertical para centrar */
 .login-spacer {
-    height: 18vh;
+  height: 16vh;
 }
 
 /* Contenedor compacto */
 .compact-wrap {
-    max-width: 380px;
-    margin: 0 auto;
-    text-align: center;
+  max-width: 360px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Logo */
-.logo-wrap {
-    text-align: center;
-    margin-bottom: 25px;
+.login-logo {
+  width: 160px;
+  margin-bottom: 20px;
 }
 
-.logo-wrap img {
-    width: 240px;
-    max-width: 90%;
-    height: auto;
-}
-
-/* Input */
+/* Input y botón */
 .compact-wrap div[data-baseweb="input"]{
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .compact-wrap input{
-    height: 46px !important;
-    border-radius: 10px !important;
+  height: 46px !important;
+  border-radius: 10px !important;
 }
 
-/* Botón */
 .compact-wrap .stButton > button{
-    width: 100% !important;
-    height: 48px !important;
-    border-radius: 10px !important;
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    margin-top: 12px !important;
+  width: 100% !important;
+  height: 48px !important;
+  border-radius: 10px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  margin-top: 12px !important;
 }
 
 /* Iframe fullscreen */
 .pbi-frame{
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    border: 0;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: 0;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # ===============================
-# AUTENTICACIÓN
+# AUTH
 # ===============================
 PASSWORD = st.secrets["APP_PASSWORD"]
 
@@ -100,18 +93,17 @@ if not st.session_state.authenticated:
 
     st.markdown('<div class="login-spacer"></div>', unsafe_allow_html=True)
 
-    left, center, right = st.columns([1, 2, 1])
+    left, center, right = st.columns([1.4, 1, 1.4])
 
     with center:
 
         st.markdown('<div class="compact-wrap">', unsafe_allow_html=True)
 
-        # LOGO CENTRADO Y GRANDE
-        st.markdown("""
-        <div class="logo-wrap">
-            <img src="https://i.postimg.cc/tJvFx7V6/463003060-8370865312967718-7946847523939617482-n.jpg">
-        </div>
-        """, unsafe_allow_html=True)
+        # LOGO
+        st.markdown(
+            '<img src="https://i.postimg.cc/tJvFx7V6/463003060-8370865312967718-7946847523939617482-n.jpg" class="login-logo">',
+            unsafe_allow_html=True
+        )
 
         st.markdown("<h2 style='margin-bottom:6px;'>🔐 Acceso Privado</h2>", unsafe_allow_html=True)
         st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales3</h4>", unsafe_allow_html=True)
@@ -130,16 +122,11 @@ if not st.session_state.authenticated:
     st.stop()
 
 # ===============================
-# DASHBOARD FULLSCREEN
+# DASHBOARD
 # ===============================
 POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiN2U5MTBhODMtYzgxOS00OTY4LThjMGEtYTRkMmFkMDgzMGFkIiwidCI6ImMyZjliMjM5LTE0YTEtNDgyZi1hMTAyLTQyYjE0NTgzMzFjOSJ9"
 
 st.markdown(
-    f"""
-    <iframe class="pbi-frame"
-        src="{POWERBI_URL}"
-        allowfullscreen="true">
-    </iframe>
-    """,
+    f"""<iframe class="pbi-frame" src="{POWERBI_URL}" allowfullscreen="true"></iframe>""",
     unsafe_allow_html=True
 )
