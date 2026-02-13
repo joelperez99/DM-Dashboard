@@ -38,13 +38,20 @@ footer {visibility: hidden;}
 .compact-wrap {
   max-width: 360px;
   margin: 0 auto;
+}
+
+/* CENTRADO TOTAL del bloque (logo + títulos) */
+.center-block {
   text-align: center;
 }
 
-/* Logo */
+/* Logo centrado */
 .login-logo {
-  width: 160px;
-  margin-bottom: 20px;
+  width: 220px;          /* más grande (ajusta aquí) */
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto 18px auto;  /* centrado */
 }
 
 /* Input y botón */
@@ -99,14 +106,19 @@ if not st.session_state.authenticated:
 
         st.markdown('<div class="compact-wrap">', unsafe_allow_html=True)
 
-        # LOGO
+        # TODO centrado
+        st.markdown('<div class="center-block">', unsafe_allow_html=True)
+
+        # LOGO centrado y más grande
         st.markdown(
             '<img src="https://i.postimg.cc/tJvFx7V6/463003060-8370865312967718-7946847523939617482-n.jpg" class="login-logo">',
             unsafe_allow_html=True
         )
 
-        st.markdown("<h2 style='margin-bottom:6px;'>🔐 Acceso Privado</h2>", unsafe_allow_html=True)
-        st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales</h4>", unsafe_allow_html=True)
+        st.markdown("<h2 style='margin:0 0 6px 0;'>🔐 Acceso Privado</h2>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin:0 0 20px 0;'>DM Sales3</h4>", unsafe_allow_html=True)
+
+        st.markdown('</div>', unsafe_allow_html=True)  # cierre center-block
 
         pwd = st.text_input("Contraseña", type="password")
 
@@ -117,7 +129,7 @@ if not st.session_state.authenticated:
             else:
                 st.error("Contraseña incorrecta")
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)  # cierre compact-wrap
 
     st.stop()
 
