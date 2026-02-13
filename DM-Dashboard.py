@@ -115,16 +115,14 @@ if not st.session_state.authenticated:
             unsafe_allow_html=True
         )
 
-     st.markdown(
-    "<h2 style='margin:0 0 6px 0; text-align:center;'>🔐 Acceso Privado</h2>",
-    unsafe_allow_html=True
-)
+       st.markdown("""
+<div style="text-align:center;">
+    <h2 style="margin:0 0 6px 0;">🔐 Acceso Privado</h2>
+    <h4 style="margin:0 0 20px 0;">DM Sales3</h4>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown(
-    "<h4 style='margin:0 0 20px 0; text-align:center;'>DM Sales3</h4>",
-    unsafe_allow_html=True
-)
-
+        st.markdown('</div>', unsafe_allow_html=True)  # cierre center-block
 
         pwd = st.text_input("Contraseña", type="password")
 
