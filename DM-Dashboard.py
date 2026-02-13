@@ -5,7 +5,7 @@ import streamlit as st
 # ===============================
 
 st.set_page_config(
-    page_title="DM Sales3",
+    page_title="DM Sales",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -85,7 +85,7 @@ POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiN2U5MTBhODMtYzgxOS00OTY4LT
 st.markdown(
     f"""
     <iframe 
-        title="DM Sales3"
+        title="DM Sales"
         width="100%"
         height="900"
         src="{POWERBI_URL}"
