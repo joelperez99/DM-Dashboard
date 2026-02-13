@@ -1,5 +1,8 @@
 import streamlit as st
 
+# ===============================
+# CONFIG
+# ===============================
 st.set_page_config(
     page_title="DM Sales3",
     layout="wide",
@@ -7,11 +10,11 @@ st.set_page_config(
 )
 
 # ===============================
-# CSS
+# CSS: quitar UI y centrar
 # ===============================
 st.markdown("""
 <style>
-/* Quitar UI Streamlit */
+/* Ocultar UI Streamlit */
 header {visibility: hidden;}
 [data-testid="stToolbar"] {display: none;}
 [data-testid="stDecoration"] {display: none;}
@@ -19,76 +22,40 @@ header {visibility: hidden;}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
-/* Quitar padding general */
-.block-container { padding: 0 !important; }
-
-/* Centrar todo el contenido del login */
-.login-page {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Quitar padding grande */
+.block-container{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* Tarjeta (box) */
-.login-card {
-  width: 520px;
-  max-width: 92vw;
-  padding: 44px 44px 34px 44px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,.06);
-  box-shadow: 0 12px 40px rgba(0,0,0,.08);
+/* Centrar vertical el “bloque” de login */
+.login-spacer {
+  height: 18vh;
 }
 
-/* Título */
-.login-title {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 14px;
-  font-size: 52px;
-  font-weight: 800;
-  margin: 0;
-  color: #1f2937;
-  line-height: 1.05;
+/* Compactar input + botón (ancho fijo) */
+.compact-wrap {
+  max-width: 360px;
+  margin: 0 auto;
 }
 
-/* Subtítulo */
-.login-subtitle {
-  text-align:center;
-  margin-top: 12px;
-  margin-bottom: 26px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #2b2f36;
-}
-
-/* Label */
-.login-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #6b7280;
-  margin-bottom: 8px;
-}
-
-/* Input y botón: que no se estiren raro */
-.login-card div[data-baseweb="input"]{
+/* Input y botón 100% del wrap */
+.compact-wrap div[data-baseweb="input"]{
   width: 100% !important;
 }
 
-.login-card input{
+.compact-wrap input{
   height: 46px !important;
   border-radius: 10px !important;
 }
 
-.login-card .stButton > button{
+.compact-wrap .stButton > button{
   width: 100% !important;
   height: 48px !important;
   border-radius: 10px !important;
   font-size: 18px !important;
   font-weight: 700 !important;
-  margin-top: 14px !important;
+  margin-top: 12px !important;
 }
 
 /* Iframe full screen */
@@ -110,26 +77,23 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 # ===============================
-# LOGIN
+# LOGIN (centrado y compacto)
 # ===============================
 if not st.session_state.authenticated:
-    # Capa de centrado
-    st.markdown('<div class="login-page">', unsafe_allow_html=True)
 
-    # Usamos columnas para forzar que TODO quede dentro del ancho (tarjeta)
-    left, center, right = st.columns([1, 2, 1])
+    # Espaciador para centrar visualmente (ajusta 18vh si lo quieres más arriba/abajo)
+    st.markdown('<div class="login-spacer"></div>', unsafe_allow_html=True)
+
+    # 3 columnas: todo va en la del centro
+    left, center, right = st.columns([1.4, 1, 1.4])
 
     with center:
-        st.markdown('<div class="login-card">', unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align:center; margin-bottom:6px;'>🔐 Acceso Privado</h1>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align:center; margin-top:0; margin-bottom:22px;'>DM Sales3</h3>", unsafe_allow_html=True)
 
-        st.markdown("""
-            <div class="login-title">🔐 <span>Acceso Privado</span></div>
-            <div class="login-subtitle">DM Sales3</div>
-            <div class="login-label">Contraseña</div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="compact-wrap">', unsafe_allow_html=True)
 
-        pwd = st.text_input("", type="password", label_visibility="collapsed")
-
+        pwd = st.text_input("Contraseña", type="password")
         if st.button("Entrar"):
             if pwd == PASSWORD:
                 st.session_state.authenticated = True
@@ -139,7 +103,6 @@ if not st.session_state.authenticated:
 
         st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown('</div>', unsafe_allow_html=True)
     st.stop()
 
 # ===============================
