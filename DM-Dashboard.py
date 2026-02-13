@@ -58,7 +58,7 @@ if not st.session_state.authenticated:
     st.markdown("""
     <div style='text-align:center; margin-top:150px;'>
         <h1>🔐 Acceso Privado</h1>
-        <h3>DM Sales3</h3>
+        <h3>DM Sales</h3>
     </div>
     """, unsafe_allow_html=True)
 
