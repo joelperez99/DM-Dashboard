@@ -106,7 +106,7 @@ if not st.session_state.authenticated:
         )
 
         st.markdown("<h2 style='margin-bottom:6px;'>🔐 Acceso Privado</h2>", unsafe_allow_html=True)
-        st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales3</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales</h4>", unsafe_allow_html=True)
 
         pwd = st.text_input("Contraseña", type="password")
 
