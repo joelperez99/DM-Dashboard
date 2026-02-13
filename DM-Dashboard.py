@@ -10,10 +10,11 @@ st.set_page_config(
 )
 
 # ===============================
-# CSS: quitar UI y centrar
+# CSS
 # ===============================
 st.markdown("""
 <style>
+
 /* Ocultar UI Streamlit */
 header {visibility: hidden;}
 [data-testid="stToolbar"] {display: none;}
@@ -28,18 +29,25 @@ footer {visibility: hidden;}
   padding-bottom: 0 !important;
 }
 
-/* Centrar vertical el “bloque” de login */
+/* Espacio vertical para centrar */
 .login-spacer {
-  height: 18vh;
+  height: 16vh;
 }
 
-/* Compactar input + botón (ancho fijo) */
+/* Contenedor compacto */
 .compact-wrap {
   max-width: 360px;
   margin: 0 auto;
+  text-align: center;
 }
 
-/* Input y botón 100% del wrap */
+/* Logo */
+.login-logo {
+  width: 160px;
+  margin-bottom: 20px;
+}
+
+/* Input y botón */
 .compact-wrap div[data-baseweb="input"]{
   width: 100% !important;
 }
@@ -58,7 +66,7 @@ footer {visibility: hidden;}
   margin-top: 12px !important;
 }
 
-/* Iframe full screen */
+/* Iframe fullscreen */
 .pbi-frame{
   position: fixed;
   top: 0; left: 0;
@@ -66,6 +74,7 @@ footer {visibility: hidden;}
   height: 100vh;
   border: 0;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -73,27 +82,34 @@ footer {visibility: hidden;}
 # AUTH
 # ===============================
 PASSWORD = st.secrets["APP_PASSWORD"]
+
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 # ===============================
-# LOGIN (centrado y compacto)
+# LOGIN
 # ===============================
 if not st.session_state.authenticated:
 
-    # Espaciador para centrar visualmente (ajusta 18vh si lo quieres más arriba/abajo)
     st.markdown('<div class="login-spacer"></div>', unsafe_allow_html=True)
 
-    # 3 columnas: todo va en la del centro
     left, center, right = st.columns([1.4, 1, 1.4])
 
     with center:
-        st.markdown("<h1 style='text-align:center; margin-bottom:6px;'>🔐 Acceso Privado</h1>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align:center; margin-top:0; margin-bottom:22px;'>DM Sales3</h3>", unsafe_allow_html=True)
 
         st.markdown('<div class="compact-wrap">', unsafe_allow_html=True)
 
+        # LOGO
+        st.markdown(
+            '<img src="https://i.postimg.cc/tJvFx7V6/463003060-8370865312967718-7946847523939617482-n.jpg" class="login-logo">',
+            unsafe_allow_html=True
+        )
+
+        st.markdown("<h2 style='margin-bottom:6px;'>🔐 Acceso Privado</h2>", unsafe_allow_html=True)
+        st.markdown("<h4 style='margin-top:0; margin-bottom:20px;'>DM Sales3</h4>", unsafe_allow_html=True)
+
         pwd = st.text_input("Contraseña", type="password")
+
         if st.button("Entrar"):
             if pwd == PASSWORD:
                 st.session_state.authenticated = True
