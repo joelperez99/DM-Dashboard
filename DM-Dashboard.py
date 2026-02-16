@@ -136,7 +136,7 @@ if not st.session_state.authenticated:
 # ===============================
 # DASHBOARD
 # ===============================
-POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiOTc0YWQ2NGUtMzBlNy00ZDhjLWJhZjgtNzUwN2EwY2QyMTI3IiwidCI6ImMyZjliMjM5LTE0YTEtNDgyZi1hMTAyLTQyYjE0NTgzMzFjOSJ9"
+POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiOTc0YWQ2NGUtMzBlNy00ZDhjLWJhZjgtNzUwN2EwY2QyMTI3IiwidCI6ImMyZjliMjM5LTE0YTEtNDgyZi1hMTAyLTQyYjE0NTgzMzFjO8YU"
 
 st.markdown(
     f"""<iframe class="pbi-frame" src="{POWERBI_URL}" allowfullscreen="true"></iframe>""",
